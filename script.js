@@ -44,13 +44,13 @@ class Rocket{
 				rocketDataset.stageOneFuelDate = currentTime;
 			}else{ //Schedule the next tracking iteration.
 				timeouts.push(setTimeout(function(){
-				rocketHolder.rocketData.trackFuel()
+					rocketHolder.rocketData.trackFuel()
 				}.bind(this), 1000));
 			}
 		}else if(totalFuelDate - (currentTime*1) > 0){//if there's stage two fuel left, hide stage 1 and:
 			rocketHolder.children[1].classList.add('notDisplayed');
 			
-			rocketDataset.totalFuel = ((totalFuelDate - (currentTime*1))/1000).toFixed(2);
+			rocketDataset.totalFuel = ((totalFuelDate - currentTime)/1000).toFixed(2);
 			totalFuel = rocketDataset.totalFuel;
 			if(totalFuel <= 0){ //If all fuel is spent, hide the rocket
 				rocketHolder.classList.add('notDisplayed');
