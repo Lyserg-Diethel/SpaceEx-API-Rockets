@@ -1,0 +1,150 @@
+body{
+	margin:0;
+	padding: 0;
+	background-image: url(assets/bg.jpg);
+	position: relative;
+	height: 100vh;
+	overflow: hidden;
+}
+.startBtn{
+	position: absolute;
+	top:0;
+	left:0;
+	right:0;
+	margin:auto auto;
+	background-color: #47B;
+	height: 2em;
+	width: 20%;
+	border-radius: 3px;
+	line-height: 2em;
+	font-size: 2em;
+	text-align: center;
+	z-index: 11;
+}
+.startBtn:hover{
+	cursor: pointer;
+	background-color: #69D;
+}
+.startBtn:hover .startBtnSlider{
+	width: 100%;
+}
+.startBtn:hover .startBtnText{
+	color: #AAF;
+}
+.startBtnSlider{
+	transition: .3s;
+	position: absolute;
+	top:0;
+	left:0;
+	width:0%;
+	height:100%;
+	background-color: #F00;
+	z-index: 0;
+}
+.startBtnText{
+	transition: .3s;
+	position: relative;
+	z-index: 10;
+}
+.launchPad{
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	position: absolute;
+	top: calc(100% - 115px);
+}
+.successOverlay{
+	width: 100%;
+	height: 100%;
+	position:fixed;
+	background-color: #F00;
+	opacity: .2;
+	z-index: 99;
+}
+.successPopup{
+	text-align: center;
+	line-height: 2em;
+	font-size: 3vw;
+	position: fixed;
+	left: 0;
+	right: 0;
+	margin: auto auto;
+	display: flex;
+	justify-content: center;
+	border-radius: 10px;
+	width: 70%;
+	min-height: 40vh;
+	background-color: #448;
+	margin-top: 30vh;
+	z-index: 100;
+}
+.restartBtn{
+	position: absolute;
+
+	bottom: 5px;
+	width: 70%;
+	height: 2em;
+	line-height: 2em;
+	border-radius: 100px;
+	border: 1px solid #55F;
+	cursor: pointer;
+}
+.restartBtn:hover{
+	background-color: #66A;
+}
+.stageTwoHolder{
+	margin-bottom: -6px;
+}
+
+.componentsHolder{
+	position: relative;
+	animation-fill-mode: forwards;
+}
+.componentsHolder::before{
+    content: attr(data-total-fuel);
+    display: flex;
+    justify-content: center;
+    color:#FFF;
+	border: 1px solid white;
+	border-radius: 3px;
+}
+
+.componentsHolder::after{
+	content:url(assets/thrust.png); /*use JavaSCript to set this when the rockets are launched.*/
+	display: flex;
+	justify-content: space-around;
+	animation: flicker 0.3s infinite;
+}
+
+@keyframes flicker{
+	0%{opacity: 1;}
+	20%{opacity: 0.5;}
+	30%{opacity: 1;}
+	40%{opacity: 0.7;}
+	50%{opacity: 0.4;}
+	60%{opacity: 1;}
+	70%{opacity: 0.9;}
+	80%{opacity: 0.5;}
+	90%{opacity: 0.8;}
+	100%{opacity: 1;}
+}
+.notDisplayed{
+	display: none;
+}
+
+
+/*I THINK THERE'S A STRUCTURAL PROBLEM.
+CONSIDER MAKING DYNAMIC NUMBER OF 100VH DIVS, CONTAINED INSIDE A FLEX-DISPLAYED CONTAINER(PROLLY THE BODY ELEMENT).
+THAT WAY YOU CAN MAKE THE ROCKETS RISE.
+
+BONUS: FIND A WAY THAT DOESN'T REQUIRE HUGE DIVS; MAYBE A NON-FLEX WAY TO STICK THE ROCKETS TO THE FLOOR?
+*/
+@keyframes fly{	/*Use JavaSCript to make the fuel-meters. When they equal 0 or less, display:none that componentsHolder.*/
+	0%{
+		bottom:0;
+	}
+	100%{
+		bottom:85vh;
+	}
+}
