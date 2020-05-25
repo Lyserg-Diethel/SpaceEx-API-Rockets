@@ -99,7 +99,7 @@ body{
 
 .componentsHolder{
 	position: relative;
-	animation-fill-mode: forwards;
+	text-align: center;
 }
 .componentsHolder::before{
     content: attr(data-total-fuel);
@@ -139,5 +139,12 @@ body{
 	}
 	100%{
 		bottom:85vh;
+	}
+}
+
+@media (min-width: 600px) and (max-width: 1024px){
+	.componentsHolder::before{
+	font-size:1.3em;
+	padding: 2px;
 	}
 }
