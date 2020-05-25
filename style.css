@@ -111,7 +111,7 @@ body{
 }
 
 .componentsHolder::after{
-	content:url(assets/thrust.png); /*use JavaSCript to set this when the rockets are launched.*/
+	content:url(assets/thrust.png);
 	display: flex;
 	justify-content: space-around;
 	animation: flicker 0.3s infinite;
@@ -133,14 +133,7 @@ body{
 	display: none;
 }
 
-
-/*I THINK THERE'S A STRUCTURAL PROBLEM.
-CONSIDER MAKING DYNAMIC NUMBER OF 100VH DIVS, CONTAINED INSIDE A FLEX-DISPLAYED CONTAINER(PROLLY THE BODY ELEMENT).
-THAT WAY YOU CAN MAKE THE ROCKETS RISE.
-
-BONUS: FIND A WAY THAT DOESN'T REQUIRE HUGE DIVS; MAYBE A NON-FLEX WAY TO STICK THE ROCKETS TO THE FLOOR?
-*/
-@keyframes fly{	/*Use JavaSCript to make the fuel-meters. When they equal 0 or less, display:none that componentsHolder.*/
+@keyframes fly{
 	0%{
 		bottom:0;
 	}
