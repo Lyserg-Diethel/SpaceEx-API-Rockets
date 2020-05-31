@@ -102,7 +102,7 @@ body{
 	text-align: center;
 }
 .componentsHolder::before{
-    content: attr(data-total-fuel);
+    content: attr(data-current-stage-fuel);
     display: flex;
     justify-content: center;
     color:#FFF;
@@ -137,8 +137,12 @@ body{
 	0%{
 		bottom:0;
 	}
+	98%{
+		opacity: 100%;
+	}
 	100%{
 		bottom:85vh;
+		opacity: 0%;
 	}
 }
 
