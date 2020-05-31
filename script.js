@@ -17,11 +17,11 @@ class Rocket{
 		this.stageTwoFuel = stageTwoFuel;
 		this.stageTwoFuelDate = (new Date()*1) + (this.stageTwoFuel * 1000);
 		this.totalFuel = (stageOneFuel + stageTwoFuel);
-		this.RocketInDOM = this.buildRocket();
+		this.rocketInDOM = this.buildRocket();
 	}
 	trackFuel(){ //Called repeatedly for each rocket to track stages and remaining fuel.
 
-		let rocketDomContainer = this.RocketInDOM;
+		let rocketDomContainer = this.rocketInDOM;
 		let rocketDataset = rocketDomContainer.dataset;
 		let currentTime = new Date();
 
@@ -117,7 +117,7 @@ class Rocket{
 		launchPad.appendChild(componentsHolder);
 	}
 	launchRocket(){
-		this.RocketInDOM.style.animation = `fly ${this.totalFuel}s linear`;
+		this.rocketInDOM.style.animation = `fly ${this.totalFuel}s linear`;
 		this.trackFuel();
 	}
 }
@@ -144,7 +144,7 @@ const startGame = ()=>{
 	})
 	.then(responseText => {
 		jsonStorage = JSON.parse(responseText);
-		instantiateRockets(jsonStorage);
+		instantiateAndLaunchRockets(jsonStorage);
 	})
 	.catch(e => {
   		console.log('Fetch operation failed: ' + e.message);
@@ -153,19 +153,22 @@ const startGame = ()=>{
 const replayGame = function(){
 	clearTimeouts();
 	resetGameState();
-	instantiateRockets(jsonStorage);
+	instantiateAndLaunchRockets(jsonStorage);
 }
-const instantiateRockets = function(jsonStorage){
+const instantiateAndLaunchRockets = function(jsonStorage){
+	const rocketArr = [];
 	for(let obj of jsonStorage){
 		let newRocket = new Rocket(obj.id, obj.first_stage.fuel_amount_tons, obj.second_stage.fuel_amount_tons);
+		rocketArr.push(newRocket);
 		rocketsStillFying += 1;
 		totalLaunchPrice += obj.cost_per_launch;
-
-		newRocket.launchRocket();
+	}
+	for(let rocket of rocketArr){
+		rocket.launchRocket();
 	}
 }
 
-const gameOver= function(){
+const gameOver = function(){
 	successOverlay.classList.remove('notDisplayed');
 	popupNote.textContent = `Success! This little maneuvre cost us $${totalLaunchPrice}. Want to go again?`;
 	successPopup.classList.remove('notDisplayed');
